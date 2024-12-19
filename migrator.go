@@ -192,7 +192,7 @@ func (m Migrator) HasTable(value interface{}) bool {
 
 func (m Migrator) GetTables() (tableList []string, err error) {
 	// table_type Enum8('BASE TABLE' = 1, 'VIEW' = 2, 'FOREIGN TABLE' = 3, 'LOCAL TEMPORARY' = 4, 'SYSTEM VIEW' = 5)
-	err = m.DB.Raw("SELECT TABLE_NAME FROM information_schema.tables where table_schema=? and table_type =1", m.CurrentDatabase()).Scan(&tableList).Error
+	err = m.DB.Raw("SELECT TABLE_NAME FROM information_schema.tables where table_schema=? and table_type = ?", m.CurrentDatabase(), "BASE TABLE").Scan(&tableList).Error
 	return
 }
 
